@@ -2,6 +2,7 @@ package com.dtz.crowd;
 
 import com.dtz.crowd.entity.Admin;
 import com.dtz.crowd.mapper.AdminMapper;
+import com.dtz.crowd.service.api.AdminService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -15,7 +16,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext.xml","classpath:spring-tx.xml"})
 public class TestXML {
     @Autowired
     private DataSource dataSource;
@@ -23,7 +24,17 @@ public class TestXML {
     @Autowired
     private AdminMapper adminMapper;
 
+    @Autowired
+    private AdminService adminServiceImpl;
+
     private Logger logger = LoggerFactory.getLogger(TestXML.class);
+
+    @Test
+    public void testService() throws Exception {
+        Admin admin = new Admin(null, "jerry", "123456", "杰瑞", "jerry@gmail.com", null);
+        adminServiceImpl.saveAdmin(admin);
+    }
+
 
     /*
     * 测试数据源配置
@@ -49,6 +60,9 @@ public class TestXML {
         logger.debug("受影响的行数" + count);
     }
 
+    /*
+    * 测试日志
+    * */
     @Test
     public void testLogger() {
 
