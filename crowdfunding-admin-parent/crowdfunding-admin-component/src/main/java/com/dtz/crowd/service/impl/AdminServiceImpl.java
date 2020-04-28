@@ -17,7 +17,6 @@ public class AdminServiceImpl implements AdminService {
 
     public void saveAdmin(Admin admin) throws Exception {
         adminMapper.insert(admin);
-        throw new Exception("抛出异常");
     }
 
     public List<Admin> getAll() {
