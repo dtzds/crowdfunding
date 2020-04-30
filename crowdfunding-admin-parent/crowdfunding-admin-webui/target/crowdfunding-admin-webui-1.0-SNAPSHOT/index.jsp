@@ -29,12 +29,76 @@
                     }
                 })
             });
+
+            var array = [5,8,10];
+            var requestBody = JSON.stringify(array);
+            $("#btn2").click(function() {
+                $.ajax({
+                    url: "test/sendArray/two.html",
+                    type: "post",
+                    dataType: "text",
+                    data: requestBody,
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        alert(data);
+                    },
+                    error: function (data) {
+                        alert(data);
+                    }
+                })
+            });
+
+            $("#btn3").click(function() {
+
+                var student = {
+                    "stuId":1,
+                    "stuName": "tom",
+                    "stuAge": "20",
+                    "address": {
+                        "province": "江西",
+                        "city": "南昌",
+                        "street": "青山湖大道"
+                    },
+                    "subjectList": [
+                        {
+                            "name": "语文",
+                            "score": 70
+                        },{
+                            "name": "数学",
+                            "score": 90
+                        }
+                    ]
+                };
+                var requestBody = JSON.stringify(student);
+
+                $.ajax({
+                    url: "test/sendComposeData/three.html",
+                    type: "post",
+                    dataType: "text",
+                    data: requestBody,
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        alert(data);
+                    },
+                    error: function (data) {
+                        alert(data);
+                    }
+                })
+            });
         })
     </script>
 </head>
 <body>
     <a href="test/ssm.html">测试</a>
+    <br/>
 
-    <button id="btn1">test array</button>
+    <button id="btn1">test array1</button>
+    <br/>
+
+    <button id="btn2">test array2</button>
+    <br/>
+
+    <button id="btn3">test array2</button>
+
 </body>
 </html>

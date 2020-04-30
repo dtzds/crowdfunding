@@ -14,7 +14,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="crowdfunding-admin-component" target="1.5" />
+      <module name="crowdfunding-admin-component" target="8" />
       <module name="crowdfunding-admin-entity" target="1.5" />
       <module name="crowdfunding-admin-parent" target="1.5" />
       <module name="crowdfunding-admin-webui" target="1.5" />

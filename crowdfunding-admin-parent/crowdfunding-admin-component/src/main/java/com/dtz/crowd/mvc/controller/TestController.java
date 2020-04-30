@@ -1,9 +1,10 @@
 package com.dtz.crowd.mvc.controller;
 
 import com.dtz.crowd.entity.Admin;
-import com.dtz.crowd.mapper.AdminMapper;
 import com.dtz.crowd.service.api.AdminService;
-import com.sun.deploy.net.HttpResponse;
+import lombok.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,12 +14,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 @Controller
 public class TestController {
 
     @Autowired
     private AdminService adminService;
+
+    private Logger logger = LoggerFactory.getLogger(TestController.class);
+
+
+    @ResponseBody
+    @RequestMapping("/test/sendComposeData/three.html")
+    public String sendComposeData(@RequestBody Student student) {
+        logger.info(student.toString());
+        return "success";
+    }
+
+    @RequestMapping("/test/sendArray/two.html")
+    @ResponseBody
+    public String sendArray2(@RequestBody List<Integer> array) {
+        array.stream().forEach(i-> System.out.println(i));
+
+        return "success";
+    }
 
     @RequestMapping("/test/sendArray/one.html")
     public String sendArray(@RequestParam("array[]") List<Integer> array) {
@@ -30,6 +50,41 @@ public class TestController {
         List<Admin> all = adminService.getAll();
         modelMap.addAttribute("adminList", all);
         return "target";
+    }
+
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Setter
+    @Getter
+    @ToString
+    static class Student {
+        private Integer stuId;
+        private String stuName;
+        private Integer stuAge;
+        private Address address;
+        private List<Subject> subjectList;
+    }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Setter
+    @Getter
+    @ToString
+    static class Address {
+        private String province;
+        private String city;
+        private String street;
+    }
+
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Setter
+    @Getter
+    @ToString
+    static class Subject {
+        private String name;
+        private String score;
     }
 
 }

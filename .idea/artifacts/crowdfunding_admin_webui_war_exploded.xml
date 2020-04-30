@@ -52,6 +52,7 @@
           <element id="library" level="project" name="Maven: ch.qos.logback:logback-core:1.2.3" />
           <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.7.25" />
           <element id="library" level="project" name="Maven: org.jetbrains:annotations-java5:19.0.0" />
+          <element id="library" level="project" name="Maven: org.projectlombok:lombok:1.16.22" />
         </element>
       </element>
       <element id="directory" name="META-INF">
