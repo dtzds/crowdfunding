@@ -85,6 +85,44 @@
                     }
                 })
             });
+
+            $("#btn4").click(function() {
+
+                var student = {
+                    "stuId":1,
+                    "stuName": "tom",
+                    "stuAge": "20",
+                    "address": {
+                        "province": "江西",
+                        "city": "南昌",
+                        "street": "青山湖大道"
+                    },
+                    "subjectList": [
+                        {
+                            "name": "语文",
+                            "score": 70
+                        },{
+                            "name": "数学",
+                            "score": 90
+                        }
+                    ]
+                };
+                var requestBody = JSON.stringify(student);
+
+                $.ajax({
+                    url: "test/sendComposeData/object.json",
+                    type: "post",
+                    dataType: "json",
+                    data: requestBody,
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        alert(data);
+                    },
+                    error: function (data) {
+                        alert(data);
+                    }
+                })
+            });
         })
     </script>
 </head>
@@ -99,6 +137,10 @@
     <br/>
 
     <button id="btn3">test array2</button>
+
+    <br/>
+
+    <button id="btn4">test ResultEntity</button>
 
 </body>
 </html>

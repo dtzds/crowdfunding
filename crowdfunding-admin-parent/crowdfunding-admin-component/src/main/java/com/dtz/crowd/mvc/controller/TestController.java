@@ -2,6 +2,8 @@ package com.dtz.crowd.mvc.controller;
 
 import com.dtz.crowd.entity.Admin;
 import com.dtz.crowd.service.api.AdminService;
+import com.dtz.crowd.util.CrowdUtil;
+import com.dtz.crowd.util.ResultEntity;
 import lombok.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -24,6 +27,16 @@ public class TestController {
 
     private Logger logger = LoggerFactory.getLogger(TestController.class);
 
+
+    @ResponseBody
+    @RequestMapping("/test/sendComposeData/object.json")
+    public ResultEntity<Student> sendData(@RequestBody Student student, HttpServletRequest request) {
+        String a = null;
+        System.out.println(a.length());
+
+        logger.info(student.toString());
+        return ResultEntity.successWithData(student);
+    }
 
     @ResponseBody
     @RequestMapping("/test/sendComposeData/three.html")
@@ -46,7 +59,11 @@ public class TestController {
     }
 
     @RequestMapping("/test/ssm.html")
-    public String test(ModelMap modelMap) {
+    public String test(ModelMap modelMap, HttpServletRequest request) {
+
+        String a = null;
+        System.out.println(a.length());
+
         List<Admin> all = adminService.getAll();
         modelMap.addAttribute("adminList", all);
         return "target";
