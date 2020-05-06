@@ -13,7 +13,7 @@
         <module name="crowdfunding-common-reverse" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="8">
       <module name="crowdfunding-admin-component" target="1.5" />
       <module name="crowdfunding-admin-entity" target="1.5" />
       <module name="crowdfunding-admin-parent" target="1.5" />
