@@ -1,8 +1,10 @@
 package com.dtz.crowd.mvc.config;
 
+import com.dtz.crowd.constant.CrowdConstant;
 import com.dtz.crowd.util.CrowdUtil;
 import com.dtz.crowd.util.ResultEntity;
 import com.google.gson.Gson;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,6 +24,13 @@ public class CrowdExceptionResolver {
     public ModelAndView resolverNullPointException(NullPointerException exception,
                                                    HttpServletRequest request,
                                                    HttpServletResponse response) throws IOException {
+        String viewName = "error";
+        return commonRelover(exception, request, response, viewName);
+
+    }
+
+    @Nullable
+    private ModelAndView commonRelover(NullPointerException exception, HttpServletRequest request, HttpServletResponse response, String viewName) throws IOException {
         // 1、判断是否为ajax请求
         boolean isAjax = CrowdUtil.judgeResult(request);
 
@@ -45,9 +54,9 @@ public class CrowdExceptionResolver {
         // 9、不是ajax请求，创建ModelAndView对象
         ModelAndView modelAndView = new ModelAndView();
         // 10、将Exception对象返回
-        modelAndView.addObject("exception", exception);
+        modelAndView.addObject(CrowdConstant.ATTR_NAME_EXCEPTION, exception);
         // 11、设置目标视图名称
-        modelAndView.setViewName("error");
+        modelAndView.setViewName(viewName);
         // 12、返回modelAndView
         return modelAndView;
     }
