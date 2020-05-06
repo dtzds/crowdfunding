@@ -2,6 +2,7 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -13,8 +14,8 @@
         <module name="crowdfunding-common-reverse" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="8">
-      <module name="crowdfunding-admin-component" target="1.5" />
+    <bytecodeTargetLevel>
+      <module name="crowdfunding-admin-component" target="8" />
       <module name="crowdfunding-admin-entity" target="1.5" />
       <module name="crowdfunding-admin-parent" target="1.5" />
       <module name="crowdfunding-admin-webui" target="1.5" />

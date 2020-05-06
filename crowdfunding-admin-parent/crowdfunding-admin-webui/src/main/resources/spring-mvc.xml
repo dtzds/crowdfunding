@@ -15,4 +15,17 @@
         <property name="prefix" value="/WEB-INF/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
+
+    <!-- 基于xml的异常映射 -->
+    <bean id="simpleMappingExceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <!-- 配置异常类型和具体的视图的对应关系 -->
+        <property name="exceptionMappings">
+            <props>
+                <!-- key：为异常类型；
+                    标签体：为与异常相对应的视图(需要拼前后缀得到具体的路径）
+                -->
+                <prop key="java.lang.Exception">error</prop>
+            </props>
+        </property>
+    </bean>
 </beans>
