@@ -11,6 +11,7 @@
     <title>Title</title>
     <base href="http://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/">
     <script type="text/javascript" src="jquery/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="layer/layer.js"></script>
     <script>
         $(function() {
             $("#btn1").click(function() {
@@ -123,6 +124,11 @@
                     }
                 })
             });
+
+            $("#btn5").click(function () {
+               /* alert("cdd");*/
+                layer.msg("layer弹框");
+            });
         })
     </script>
 </head>
@@ -141,6 +147,9 @@
     <br/>
 
     <button id="btn4">test ResultEntity</button>
+    <br/>
+
+    <button id="btn5">layer弹框测试</button>
 
 </body>
 </html>

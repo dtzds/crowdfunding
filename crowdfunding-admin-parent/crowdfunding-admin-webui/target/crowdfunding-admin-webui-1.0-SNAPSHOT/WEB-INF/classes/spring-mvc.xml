@@ -28,4 +28,14 @@
             </props>
         </property>
     </bean>
+
+    <!-- 配置viewController -->
+    <!-- 相当于
+        @RequestMapping("/admin/to/login.html")
+        public String toPage() {
+            return "admin-login";
+        }
+    -->
+    <mvc:view-controller path="/admin/to/login.html" view-name="admin-login"/>
+
 </beans>

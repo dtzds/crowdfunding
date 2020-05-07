@@ -25,12 +25,12 @@ public class CrowdExceptionResolver {
                                                    HttpServletRequest request,
                                                    HttpServletResponse response) throws IOException {
         String viewName = "error";
-        return commonRelover(exception, request, response, viewName);
+        return commonResolver(exception, request, response, viewName);
 
     }
 
     @Nullable
-    private ModelAndView commonRelover(NullPointerException exception, HttpServletRequest request, HttpServletResponse response, String viewName) throws IOException {
+    private ModelAndView commonResolver(NullPointerException exception, HttpServletRequest request, HttpServletResponse response, String viewName) throws IOException {
         // 1、判断是否为ajax请求
         boolean isAjax = CrowdUtil.judgeResult(request);
 

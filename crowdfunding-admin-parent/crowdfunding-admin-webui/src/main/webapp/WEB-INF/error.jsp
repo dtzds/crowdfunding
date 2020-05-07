@@ -12,6 +12,7 @@
 </head>
 <body>
 <%-- 从请求域中取出exception对象，再进一步访问message就可以获得异常数据 --%>
+    发生错误
     ${requestScope.exception.message}
 </body>
 </html>
