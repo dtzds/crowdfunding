@@ -59,7 +59,6 @@
         <element id="file-copy" path="$PROJECT_DIR$/crowdfunding-admin-parent/crowdfunding-admin-webui/target/crowdfunding-admin-webui-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="crowdfunding-admin-webui/web/Web" />
-      <element id="dir-copy" path="$PROJECT_DIR$/crowdfunding-admin-parent/crowdfunding-admin-webui/src/main/webapp" />
     </root>
   </artifact>
 </component>
