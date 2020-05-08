@@ -1,6 +1,7 @@
 package com.dtz.crowd.mvc.config;
 
 import com.dtz.crowd.constant.CrowdConstant;
+import com.dtz.crowd.exception.LoginFailedException;
 import com.dtz.crowd.util.CrowdUtil;
 import com.dtz.crowd.util.ResultEntity;
 import com.google.gson.Gson;
@@ -20,6 +21,14 @@ import java.io.IOException;
 @ControllerAdvice
 public class CrowdExceptionResolver {
 
+    /**
+     * 发送空指针异常时
+     * @param exception
+     * @param request
+     * @param response
+     * @return
+     * @throws IOException
+     */
     @ExceptionHandler(value = NullPointerException.class)
     public ModelAndView resolverNullPointException(NullPointerException exception,
                                                    HttpServletRequest request,
@@ -29,8 +38,27 @@ public class CrowdExceptionResolver {
 
     }
 
+    /**
+     * 登录时发生异常
+     * @param exception
+     * @param request
+     * @param response
+     * @return
+     * @throws IOException
+     */
+    @ExceptionHandler(value = LoginFailedException.class)
+    public ModelAndView resolverNullPointException(LoginFailedException exception,
+                                                   HttpServletRequest request,
+                                                   HttpServletResponse response) throws IOException {
+        String viewName = "error";
+        return commonResolver(exception, request, response, viewName);
+
+    }
+
+
+
     @Nullable
-    private ModelAndView commonResolver(NullPointerException exception, HttpServletRequest request, HttpServletResponse response, String viewName) throws IOException {
+    private ModelAndView commonResolver(Exception exception, HttpServletRequest request, HttpServletResponse response, String viewName) throws IOException {
         // 1、判断是否为ajax请求
         boolean isAjax = CrowdUtil.judgeResult(request);
 

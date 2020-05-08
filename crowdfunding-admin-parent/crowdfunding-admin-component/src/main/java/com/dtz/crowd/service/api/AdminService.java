@@ -9,4 +9,6 @@ public interface AdminService {
     void saveAdmin(Admin admin) throws Exception;
 
     List<Admin> getAll();
+
+    Admin getAdminByLoginAcct(String acct, String pswd);
 }
