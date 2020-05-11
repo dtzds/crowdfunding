@@ -50,7 +50,7 @@ public class CrowdExceptionResolver {
     public ModelAndView resolverNullPointException(LoginFailedException exception,
                                                    HttpServletRequest request,
                                                    HttpServletResponse response) throws IOException {
-        String viewName = "error";
+        String viewName = "admin-login";
         return commonResolver(exception, request, response, viewName);
 
     }

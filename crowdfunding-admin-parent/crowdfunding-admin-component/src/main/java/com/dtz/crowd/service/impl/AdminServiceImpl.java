@@ -1,14 +1,19 @@
 package com.dtz.crowd.service.impl;
 
+import com.dtz.crowd.constant.CrowdConstant;
 import com.dtz.crowd.entity.Admin;
 import com.dtz.crowd.entity.AdminExample;
 import com.dtz.crowd.exception.LoginFailedException;
 import com.dtz.crowd.mapper.AdminMapper;
 import com.dtz.crowd.service.api.AdminService;
+import com.dtz.crowd.util.CrowdUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -32,17 +37,44 @@ public class AdminServiceImpl implements AdminService {
         AdminExample.Criteria criteria = adminExample.createCriteria();
         //3、添加条件：按账号名查找
         criteria.andLoginAcctEqualTo(acct);
-        //4、获取到按账号查找到的用户
+        //4、获取到按账号查找到的用户admin
         List<Admin> admins = adminMapper.selectByExample(adminExample);
 
-        //5、判断是否获取到用户
+        //5、判断是否获取到用户(为空）
         if (admins == null || admins.size() == 0) {
             //6、如果为null,则抛出登录异常
-            throw new LoginFailedException("用户不存在");
+            throw new LoginFailedException(CrowdConstant.MESSAGE_LOGIN_FAILED);
         }
-        //7、如果获取到了用户，则比较其密码的密文是否一致
-//        admins.stream().filter()
-        
-        return null;
+        //7、如果获取到的用户不唯一，则抛出不唯一的异常
+        if (admins.size() > 1) {
+            throw new RuntimeException(CrowdConstant.MESSAGE_SYSTEM_ERROR_LOGIN_NOT_UNIQUE);
+        }
+
+        Admin admin = admins.get(0);
+
+        //8、如果获取到的用户为null,则抛出异常
+        if (admin == null) {
+            throw new LoginFailedException(CrowdConstant.MESSAGE_LOGIN_FAILED);
+        }
+        //9、对密文进行比较
+        if (!Objects.equals(admin.getUserPswd(), CrowdUtil.md5(pswd))) {
+            //10、如果不一致，则抛出异常
+            throw new LoginFailedException(CrowdConstant.MESSAGE_LOGIN_FAILED);
+        }
+        //11、一致，则返回admin
+        return admin;
+    }
+
+    @Override
+    public PageInfo<Admin> getPageInfo(String keyword, Integer pageNum, Integer pageSize) {
+
+        //1、调用PageHelper的静态方法开启分页功能
+        PageHelper.startPage(pageNum, pageSize);
+
+        //2、执行查询
+        List<Admin> admins = adminMapper.selectAdminByKeyword(keyword);
+
+        //3、封装到PageInfo对象中
+        return new PageInfo<>(admins);
     }
 }

@@ -14,13 +14,13 @@
         <module name="crowdfunding-common-reverse" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="8">
       <module name="crowdfunding-admin-component" target="8" />
-      <module name="crowdfunding-admin-entity" target="1.5" />
-      <module name="crowdfunding-admin-parent" target="1.5" />
-      <module name="crowdfunding-admin-webui" target="1.5" />
-      <module name="crowdfunding-common-reverse" target="1.5" />
-      <module name="crowdfunding-common-util" target="1.5" />
+      <module name="crowdfunding-admin-entity" target="8" />
+      <module name="crowdfunding-admin-parent" target="8" />
+      <module name="crowdfunding-admin-webui" target="8" />
+      <module name="crowdfunding-common-reverse" target="8" />
+      <module name="crowdfunding-common-util" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

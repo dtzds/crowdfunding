@@ -36,17 +36,18 @@
 
 <div class="container">
 
-    <form class="form-signin" role="form">
+    <form action="admin/do/login.html" class="form-signin" role="form">
         <h2 class="form-signin-heading"><i class="glyphicon glyphicon-log-in"></i> 管理员登录</h2>
+        ${requestScope.exception.message}
         <div class="form-group has-success has-feedback">
-            <input type="text" name="adminAcct" class="form-control" id="inputSuccess4" placeholder="请输入登录账号" autofocus>
+            <input type="text" name="loginAcct" class="form-control" id="inputSuccess4" placeholder="请输入登录账号" autofocus>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
         </div>
         <div class="form-group has-success has-feedback">
-            <input type="text" name="userPswd" class="form-control" id="inputSuccess4" placeholder="请输入登录密码" style="margin-top:10px;">
+            <input type="password" name="userPswd" class="form-control" id="inputSuccess4" placeholder="请输入登录密码" style="margin-top:10px;">
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
         </div>
-        <button class="btn btn-lg btn-success btn-block" > 登录</button>
+        <button type="submit" class="btn btn-lg btn-success btn-block" > 登录</button>
     </form>
 </div>
 

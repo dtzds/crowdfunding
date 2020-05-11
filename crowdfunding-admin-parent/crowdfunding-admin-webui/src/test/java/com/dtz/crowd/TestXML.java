@@ -16,11 +16,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext.xml","classpath:spring-tx.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext.xml", "classpath:spring-tx.xml"})
 public class TestXML {
     @Autowired
     private DataSource dataSource;
-    
+
     @Autowired
     private AdminMapper adminMapper;
 
@@ -37,8 +37,8 @@ public class TestXML {
 
 
     /*
-    * 测试数据源配置
-    */
+     * 测试数据源配置
+     */
     @Test
     public void testDataSource() throws SQLException {
         Connection connection = dataSource.getConnection();
@@ -46,8 +46,8 @@ public class TestXML {
     }
 
     /*
-    * 测试spring-mybatis整合配置
-    */
+     * 测试spring-mybatis整合配置
+     */
     @Test
     public void testMybatis() {
         Admin admin = new Admin(null, "tom", "123456", "汤姆", "tom@gmail.com", null);
@@ -61,8 +61,8 @@ public class TestXML {
     }
 
     /*
-    * 测试日志
-    * */
+     * 测试日志
+     * */
     @Test
     public void testLogger() {
 
@@ -84,4 +84,11 @@ public class TestXML {
 
     }
 
+    @Test
+    public void testSaveAdminMulti() {
+        for (int i = 0; i < 352; i++) {
+            adminMapper.insert(new Admin(null, "loginAcct" + i, "userPswd" + i, "userName" + i, "email" + i + "@qq.com", null));
+
+        }
+    }
 }
