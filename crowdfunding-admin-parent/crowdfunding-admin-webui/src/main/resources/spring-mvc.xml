@@ -56,5 +56,7 @@
     <mvc:view-controller path="/admin/to/login.html" view-name="admin-login"/>
     <!-- 跳转到主页面 -->
     <mvc:view-controller path="/admin/to/main.html" view-name="admin-main"/>
+    <!-- 跳转到添加管理元页面 -->
+    <mvc:view-controller path="/admin/to/add.html" view-name="admin-add"/>
 
 </beans>

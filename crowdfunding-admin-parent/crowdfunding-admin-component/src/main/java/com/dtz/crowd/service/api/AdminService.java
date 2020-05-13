@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface AdminService {
 
-    void saveAdmin(Admin admin) throws Exception;
+    void saveAdmin(Admin admin);
 
     List<Admin> getAll();
 
@@ -31,4 +31,10 @@ public interface AdminService {
      * @return
      */
     PageInfo<Admin> getPageInfo(String keyword, Integer pageNum, Integer pageSize);
+
+    /**
+     * 根据管理员id删除管理员
+     * @param id
+     */
+    void remove(Integer id);
 }

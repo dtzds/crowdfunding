@@ -3,15 +3,21 @@ package com.dtz.crowd.service.impl;
 import com.dtz.crowd.constant.CrowdConstant;
 import com.dtz.crowd.entity.Admin;
 import com.dtz.crowd.entity.AdminExample;
+import com.dtz.crowd.exception.LoginAcctAlreadyInUseException;
 import com.dtz.crowd.exception.LoginFailedException;
 import com.dtz.crowd.mapper.AdminMapper;
 import com.dtz.crowd.service.api.AdminService;
 import com.dtz.crowd.util.CrowdUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,8 +27,30 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private AdminMapper adminMapper;
 
-    public void saveAdmin(Admin admin) throws Exception {
-        adminMapper.insert(admin);
+    private Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
+
+    public void saveAdmin(Admin admin){
+        //1、对密码进行加密
+        String userPswd = admin.getUserPswd();
+        userPswd = CrowdUtil.md5(userPswd);
+        admin.setUserPswd(userPswd);
+
+        //2、新增一个创建时间
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String createTime = format.format(date);
+        admin.setCreateTime(createTime);
+
+        //3、添加到数据库中
+        try {
+            adminMapper.insert(admin);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.debug(e.getClass().getName());
+            if (e instanceof DuplicateKeyException) {
+                throw new LoginAcctAlreadyInUseException(CrowdConstant.MESSAGE_LOGIN_ACCT_ALREADY_IN_USE);
+            }
+        }
     }
 
     public List<Admin> getAll() {
@@ -76,5 +104,10 @@ public class AdminServiceImpl implements AdminService {
 
         //3、封装到PageInfo对象中
         return new PageInfo<>(admins);
+    }
+
+    @Override
+    public void remove(Integer id) {
+        adminMapper.deleteByPrimaryKey(id);
     }
 }

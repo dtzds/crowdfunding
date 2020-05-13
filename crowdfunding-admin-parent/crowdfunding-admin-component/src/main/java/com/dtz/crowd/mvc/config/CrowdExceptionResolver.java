@@ -1,11 +1,13 @@
 package com.dtz.crowd.mvc.config;
 
 import com.dtz.crowd.constant.CrowdConstant;
+import com.dtz.crowd.exception.LoginAcctAlreadyInUseException;
 import com.dtz.crowd.exception.LoginFailedException;
 import com.dtz.crowd.util.CrowdUtil;
 import com.dtz.crowd.util.ResultEntity;
 import com.google.gson.Gson;
 import org.jetbrains.annotations.Nullable;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,6 +22,23 @@ import java.io.IOException;
 //表示当前类是一个异常处理类，每一个方法对应一个异常处理
 @ControllerAdvice
 public class CrowdExceptionResolver {
+
+    /**
+     * 当更新admin是发现账户已被使用时发生的异常
+     * @param exception
+     * @param request
+     * @param response
+     * @return
+     * @throws IOException
+     */
+    @ExceptionHandler(value = LoginAcctAlreadyInUseException.class)
+    public ModelAndView resolverNullPointException(LoginAcctAlreadyInUseException exception,
+                                                   HttpServletRequest request,
+                                                   HttpServletResponse response) throws IOException {
+        String viewName = "admin-add";
+        return commonResolver(exception, request, response, viewName);
+
+    }
 
     /**
      * 发送空指针异常时

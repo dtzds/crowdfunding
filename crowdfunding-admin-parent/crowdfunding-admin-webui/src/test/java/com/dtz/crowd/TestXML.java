@@ -3,6 +3,7 @@ package com.dtz.crowd;
 import com.dtz.crowd.entity.Admin;
 import com.dtz.crowd.mapper.AdminMapper;
 import com.dtz.crowd.service.api.AdminService;
+import com.dtz.crowd.util.CrowdUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -87,7 +88,7 @@ public class TestXML {
     @Test
     public void testSaveAdminMulti() {
         for (int i = 0; i < 352; i++) {
-            adminMapper.insert(new Admin(null, "loginAcct" + i, "userPswd" + i, "userName" + i, "email" + i + "@qq.com", null));
+            adminMapper.insert(new Admin(null, "loginAcct" + i, CrowdUtil.md5("userPswd" + i), "userName" + i, "email" + i + "@qq.com", null));
 
         }
     }
