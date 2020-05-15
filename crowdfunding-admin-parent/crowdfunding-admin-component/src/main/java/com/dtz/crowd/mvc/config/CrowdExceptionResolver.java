@@ -41,7 +41,7 @@ public class CrowdExceptionResolver {
     }
 
     /**
-     * 发送空指针异常时
+     * 发生空指针异常时
      * @param exception
      * @param request
      * @param response

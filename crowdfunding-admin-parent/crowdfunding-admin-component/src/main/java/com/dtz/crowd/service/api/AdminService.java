@@ -16,6 +16,13 @@ public interface AdminService {
     List<Admin> getAll();
 
     /**
+     * 通过id获取管理员账号的信息
+     * @param id
+     * @return
+     */
+    Admin getAdminById(Integer id);
+
+    /**
      * 管理员登陆
      * @param acct  管理员账号
      * @param pswd  管理员密码

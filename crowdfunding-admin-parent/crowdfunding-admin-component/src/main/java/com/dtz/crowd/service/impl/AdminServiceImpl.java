@@ -58,6 +58,12 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public Admin getAdminById(Integer id) {
+        Admin admin = adminMapper.selectByPrimaryKey(id);
+        return admin;
+    }
+
+    @Override
     public Admin getAdminByLoginAcct(String acct, String pswd) {
         //1、创建AdminExample对象
         AdminExample adminExample = new AdminExample();

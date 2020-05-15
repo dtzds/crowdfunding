@@ -30,6 +30,12 @@ public class AdminController {
 
     private Logger logger = LoggerFactory.getLogger(AdminController.class);
 
+    @RequestMapping("/admin/do/edit.html")
+    public String edit(Admin admin) {
+
+        return null;
+    }
+
     @RequestMapping("/admin/do/save.html")
     public String save(Admin admin) {
 
@@ -37,6 +43,18 @@ public class AdminController {
 
         adminService.saveAdmin(admin);
         return "redirect:/admin/get/page.html?pageNum=" + Integer.MAX_VALUE;
+    }
+
+
+    @RequestMapping("/admin/to/edit.html")
+    public String toEditPage(@RequestParam("id") Integer id, ModelMap modelMap) {
+        //获取管理员信息
+        Admin admin = adminService.getAdminById(id);
+
+        //将管理员信息存入modelMap中
+        modelMap.addAttribute(CrowdConstant.ATTR_NAME_ADMIN, admin);
+
+        return "admin-edit";
     }
 
     /**
