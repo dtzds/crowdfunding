@@ -4,6 +4,7 @@ import com.dtz.crowd.constant.CrowdConstant;
 import com.dtz.crowd.entity.Admin;
 import com.dtz.crowd.entity.AdminExample;
 import com.dtz.crowd.exception.LoginAcctAlreadyInUseException;
+import com.dtz.crowd.exception.LoginAcctAlreadyInUseForUpdateException;
 import com.dtz.crowd.exception.LoginFailedException;
 import com.dtz.crowd.mapper.AdminMapper;
 import com.dtz.crowd.service.api.AdminService;
@@ -115,5 +116,17 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void remove(Integer id) {
         adminMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void update(Admin admin) {
+        try {
+            adminMapper.updateByPrimaryKeySelective(admin);
+        } catch (Exception e) {
+            logger.debug(e.getClass().getName());
+            if (e instanceof DuplicateKeyException) {
+                throw new LoginAcctAlreadyInUseForUpdateException(CrowdConstant.MESSAGE_LOGIN_ACCT_ALREADY_IN_USE_FOR_UPDATE);
+            }
+        }
     }
 }

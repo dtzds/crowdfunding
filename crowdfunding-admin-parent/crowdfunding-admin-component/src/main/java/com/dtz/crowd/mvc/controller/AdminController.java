@@ -2,8 +2,12 @@ package com.dtz.crowd.mvc.controller;
 
 import com.dtz.crowd.constant.CrowdConstant;
 import com.dtz.crowd.entity.Admin;
+import com.dtz.crowd.entity.Role;
+import com.dtz.crowd.mapper.AdminMapper;
 import com.dtz.crowd.service.api.AdminService;
+import com.dtz.crowd.service.api.RoleService;
 import com.dtz.crowd.util.CrowdUtil;
+import com.dtz.crowd.util.ResultEntity;
 import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,12 +34,27 @@ public class AdminController {
 
     private Logger logger = LoggerFactory.getLogger(AdminController.class);
 
+    /**
+     * 修改管理员信息
+     * @param admin
+     * @param pageNum
+     * @param keyword
+     * @return
+     */
     @RequestMapping("/admin/do/edit.html")
-    public String edit(Admin admin) {
+    public String edit(Admin admin,
+                       @RequestParam(value = "pageNum") Integer pageNum,
+                       @RequestParam(value = "keyword") String keyword) {
+        adminService.update(admin);
 
-        return null;
+        return "redirect:/admin/get/page.html?pageNum="+ pageNum +"&keyword=" + keyword;
     }
 
+    /**
+     * 添加管理员，添加完成后进行回显
+     * @param admin
+     * @return
+     */
     @RequestMapping("/admin/do/save.html")
     public String save(Admin admin) {
 
@@ -45,9 +64,15 @@ public class AdminController {
         return "redirect:/admin/get/page.html?pageNum=" + Integer.MAX_VALUE;
     }
 
-
+    /**
+     * 跳转到管理员信息编辑页面，需要显示该管理员信息
+     * @param id
+     * @param modelMap
+     * @return
+     */
     @RequestMapping("/admin/to/edit.html")
-    public String toEditPage(@RequestParam("id") Integer id, ModelMap modelMap) {
+    public String toEditPage(@RequestParam("id") Integer id,
+                             ModelMap modelMap) {
         //获取管理员信息
         Admin admin = adminService.getAdminById(id);
 
@@ -129,5 +154,7 @@ public class AdminController {
 
         return "redirect:/admin/to/main.html";
     }
+
+
 
 }

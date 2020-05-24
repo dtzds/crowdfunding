@@ -2,6 +2,7 @@ package com.dtz.crowd.mvc.config;
 
 import com.dtz.crowd.constant.CrowdConstant;
 import com.dtz.crowd.exception.LoginAcctAlreadyInUseException;
+import com.dtz.crowd.exception.LoginAcctAlreadyInUseForUpdateException;
 import com.dtz.crowd.exception.LoginFailedException;
 import com.dtz.crowd.util.CrowdUtil;
 import com.dtz.crowd.util.ResultEntity;
@@ -24,7 +25,7 @@ import java.io.IOException;
 public class CrowdExceptionResolver {
 
     /**
-     * 当更新admin是发现账户已被使用时发生的异常
+     * 当新增admin是发现账户已被使用时发生的异常
      * @param exception
      * @param request
      * @param response
@@ -32,10 +33,27 @@ public class CrowdExceptionResolver {
      * @throws IOException
      */
     @ExceptionHandler(value = LoginAcctAlreadyInUseException.class)
-    public ModelAndView resolverNullPointException(LoginAcctAlreadyInUseException exception,
+    public ModelAndView resolverLoginAcctAlreadyInUseException(LoginAcctAlreadyInUseException exception,
                                                    HttpServletRequest request,
                                                    HttpServletResponse response) throws IOException {
         String viewName = "admin-add";
+        return commonResolver(exception, request, response, viewName);
+
+    }
+
+    /**
+     * 当修改admin时发现用户名冲突
+     * @param exception
+     * @param request
+     * @param response
+     * @return
+     * @throws IOException
+     */
+    @ExceptionHandler(value = LoginAcctAlreadyInUseForUpdateException.class)
+    public ModelAndView resolverLoginAcctAlreadyInUseForUpdateException(LoginAcctAlreadyInUseForUpdateException exception,
+                                                   HttpServletRequest request,
+                                                   HttpServletResponse response) throws IOException {
+        String viewName = "admin-edit";
         return commonResolver(exception, request, response, viewName);
 
     }
@@ -66,7 +84,7 @@ public class CrowdExceptionResolver {
      * @throws IOException
      */
     @ExceptionHandler(value = LoginFailedException.class)
-    public ModelAndView resolverNullPointException(LoginFailedException exception,
+    public ModelAndView resolverLoginFailedException(LoginFailedException exception,
                                                    HttpServletRequest request,
                                                    HttpServletResponse response) throws IOException {
         String viewName = "admin-login";

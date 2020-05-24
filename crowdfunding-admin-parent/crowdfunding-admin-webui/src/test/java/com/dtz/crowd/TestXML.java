@@ -1,7 +1,9 @@
 package com.dtz.crowd;
 
 import com.dtz.crowd.entity.Admin;
+import com.dtz.crowd.entity.Role;
 import com.dtz.crowd.mapper.AdminMapper;
+import com.dtz.crowd.mapper.RoleMapper;
 import com.dtz.crowd.service.api.AdminService;
 import com.dtz.crowd.util.CrowdUtil;
 import org.junit.Test;
@@ -27,6 +29,9 @@ public class TestXML {
 
     @Autowired
     private AdminService adminServiceImpl;
+
+    @Autowired
+    private RoleMapper roleMapper;
 
     private Logger logger = LoggerFactory.getLogger(TestXML.class);
 
@@ -90,6 +95,13 @@ public class TestXML {
         for (int i = 0; i < 352; i++) {
             adminMapper.insert(new Admin(null, "loginAcct" + i, CrowdUtil.md5("userPswd" + i), "userName" + i, "email" + i + "@qq.com", null));
 
+        }
+    }
+
+    @Test
+    public void testSaveRoleMulti() {
+        for (int i = 0; i < 352; i++) {
+            roleMapper.insert(new Role(null, "role"+i));
         }
     }
 }

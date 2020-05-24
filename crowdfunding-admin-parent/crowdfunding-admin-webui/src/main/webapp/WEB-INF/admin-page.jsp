@@ -25,7 +25,7 @@
             current_page: ${requestScope.pageInfo.pageNum - 1},  //当前页
             prev_text: "上一页",   //上一页按钮上显示的文本
             next_text: "下一页"    //下一页按钮上显示的文本
-        }
+        };
 
         //2、生成页面导航条
         $("#Pagination").pagination(totalRecord, properties);
@@ -107,7 +107,7 @@
                                         <td>
                                             <button type="button" class="btn btn-success btn-xs"><i
                                                     class=" glyphicon glyphicon-check"></i></button>
-                                            <a href="admin/to/edit.html?id=${admin.id}" type="button" class="btn btn-primary btn-xs"><i
+                                            <a href="admin/to/edit.html?id=${admin.id}&pageNum=${requestScope.pageInfo.pageNum}&keyword=${param.keyword}" type="button" class="btn btn-primary btn-xs"><i
                                                     class=" glyphicon glyphicon-pencil"></i></a>
                                             <a href="admin/do/${admin.id}/${requestScope.pageInfo.pageNum}/${param.keyword}.html" type="button" class="btn btn-danger btn-xs"><i
                                                     class=" glyphicon glyphicon-remove"></i></a>

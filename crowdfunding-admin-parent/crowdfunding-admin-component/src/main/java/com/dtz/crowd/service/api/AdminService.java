@@ -11,6 +11,10 @@ import java.util.List;
  */
 public interface AdminService {
 
+    /**
+     * 添加管理员
+     * @param admin
+     */
     void saveAdmin(Admin admin);
 
     List<Admin> getAll();
@@ -44,4 +48,10 @@ public interface AdminService {
      * @param id
      */
     void remove(Integer id);
+
+    /**
+     * 更新管理员信息
+     * @param admin
+     */
+    void update(Admin admin);
 }
