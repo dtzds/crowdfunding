@@ -17,7 +17,7 @@
     <!-- 父工程依赖管理 -->
     <properties>
         <com.dtz.spring.version>4.3.20.RELEASE</com.dtz.spring.version>
-        <com.dtz.spring.security.version>4.2.10.RELEASE</com.dtz.spring.security.version>
+        <com.dtz.spring.security.version>5.2.10.RELEASE</com.dtz.spring.security.version>
     </properties>
 
     <dependencyManagement>
